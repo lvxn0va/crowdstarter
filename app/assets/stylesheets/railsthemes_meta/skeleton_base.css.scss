@@ -1,0 +1,324 @@
+// This file is included as part of the Meta theme from
+// RailsThemes.com, which is licensed for use in a single website. The
+// license can be found in the doc folder of this application or at
+// railsthemes.com/terms.
+
+@import "railsthemes_meta/base";
+
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+
+/* Table of Content
+==================================================
+  #Reset & Basics
+  #Basic Styles
+  #Site Styles
+  #Typography
+  #Links
+  #Lists
+  #Images
+  #Buttons
+  #Forms
+  #Misc */
+
+
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block; }
+  body {
+    line-height: 1; }
+  ol, ul {
+    list-style: none; }
+  blockquote, q {
+    quotes: none; }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: '';
+    content: none; }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+
+/* #Basic Styles
+================================================== */
+  body {
+    background: $body-background;
+    font: 16px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $default-text;
+    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+    -webkit-text-size-adjust: 100%;
+ }
+
+
+/* #Typography
+================================================== */
+  h1, h2, h3, h4, h5, h6 {
+    color: $default-header-text;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-weight: normal; }
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+  h1 { font-size: 46px; line-height: 50px; margin-bottom: 14px;}
+  h2 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
+  h3 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
+  h4 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+  h5 { font-size: 17px; line-height: 24px; }
+  h6 { font-size: 14px; line-height: 21px; }
+  .subheader { color: $demphasized-text; }
+
+  p { margin: 0 0 20px 0; }
+  p img { margin: 0; }
+  p.lead { font-size: 21px; line-height: 27px; color: $demphasized-text;  }
+
+  em { font-style: italic; }
+  strong { font-weight: bold; color: $default-strong-text; }
+  small { font-size: 80%; }
+
+/*  Blockquotes  */
+  blockquote, blockquote p { font-size: 17px; line-height: 24px; color: $quote-text; font-style: italic; }
+  blockquote { margin: 0 0 20px; padding: 9px 20px 0 19px; border-left: 1px solid $quote-border; }
+  blockquote cite { display: block; color: $cite-color; }
+  blockquote cite:before { content: "\2014 \0020"; }
+  blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: $cite-color; }
+
+  hr { border: solid $hr-border; border-width: 1px 0 0; clear: both; margin: 20px 0 20px; height: 0; }
+
+
+/* #Links
+================================================== */
+  a, a:visited { color: $default-link-text; text-decoration: underline; outline: 0; }
+  a:hover, a:focus { color: $default-link-hover; }
+  p a, p a:visited { line-height: inherit; }
+
+
+/* #Lists
+================================================== */
+  ul, ol { margin-bottom: 20px; }
+  ul { list-style: outside; }
+  ol { list-style: decimal; }
+  ol, ul { margin-left: 20px; }
+  ul.square { list-style: square outside; }
+  ul.circle { list-style: circle outside; }
+  ul.disc { list-style: disc outside; }
+  ul.undecorated { list-style: none outside; }
+  ul ul, ul ol,
+  ol ol, ol ul { margin: 4px 0 5px 30px; font-size: 90%;  }
+  ul ul li, ul ol li,
+  ol ol li, ol ul li { margin-bottom: 6px; }
+  li { line-height: 18px; margin-bottom: 12px; }
+  ul.large li { line-height: 21px; }
+  li p { line-height: 21px; }
+
+/* #Images
+================================================== */
+
+  img.scale-with-grid {
+    max-width: 100%;
+    height: auto; }
+
+
+/* #Buttons
+================================================== */
+
+  a.button,
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    @include plain-gradient-background(top, $button-background1, $button-background2);
+    border: 1px solid $button-border;
+    @include border-radius(10px);
+    color: $button-text;
+    display: inline-block;
+    font-size: 21px;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255, 255, 255, .75);
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    line-height: normal;
+    padding: 11px;
+    text-align: center;
+    font-family: 'Crete Round', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    &.call_to_action {
+      color: $button-loud-text;
+    }
+    &.strong {
+      font-weight: bold;
+    }
+  }
+
+  a.button:hover,
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover {
+    color: $button-hover-text;
+    @include plain-gradient-background(top, $button-hover-background1, $button-hover-background2);
+    border: 1px solid $button-hover-border1;
+    border-top: 1px solid $button-hover-border2;
+    border-left: 1px solid $button-hover-border2; }
+
+  a.button:active,
+  button:active,
+  input[type="submit"]:active,
+  input[type="reset"]:active,
+  input[type="button"]:active {
+    border: 1px solid $button-active-border;
+    @include plain-gradient-background(top, $button-active-background1, $button-active-background2);
+  }
+
+  a.button.demi-full-width,
+  button.demi-full-width,
+  input[type="submit"].demi-full-width,
+  input[type="reset"].demi-full-width,
+  input[type="button"].demi-full-width {
+    width: 85%;
+  }
+
+  a.button.full-width,
+  button.full-width,
+  input[type="submit"].full-width,
+  input[type="reset"].full-width,
+  input[type="button"].full-width {
+    width: 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: center; }
+
+  /* Fix for odd Mozilla border & padding issues */
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+/* #Forms
+================================================== */
+
+  form {
+    margin-bottom: 20px; }
+  fieldset {
+    margin-bottom: 20px; }
+  input {
+    margin-bottom: 20px; }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    width: 210px;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,
+  select {
+    border: 1px solid $input-border;
+    padding: 6px 4px;
+    outline: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font: 18px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $input-text;
+    margin: 0 0 20px 0;
+    max-width: 100%;
+    // display: block;
+    background: $input-background; }
+  select {
+    padding: 0; }
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border: 1px solid $input-focus-border;
+     color: $input-focus-text;
+     -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+    box-shadow:  0 0 3px rgba(0,0,0,.2); }
+  textarea {
+    min-height: 60px; }
+  label,
+  legend {
+    color: $form-label-text;
+    display: block;
+    font-weight: bold;
+    font-size: 15px;  }
+  input[type="checkbox"] {
+    display: inline; }
+  label span,
+  legend span {
+    font-weight: normal;
+    font-size: 15px;
+    color: $form-label-text; }
+
+
+// For Scaffolds & Devise:
+form {
+  br { display: none; }
+  i {
+    color: $form-hint-text;
+    font-style: italic;
+    display: block;
+  }
+  input[type=checkbox] + label, input[type=radio] + label {
+    display: inline-block;
+  }
+}
+
+#message_holder .flash {
+  // The landing page flash messages
+  margin: 1.5em 2em;
+}
+
+#error_explanation, .flash, div.ui-state-error, div.ui-state-highlight {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid $body-background;// $default-notification-border;
+  @include border-radius(10px);
+  // font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  // p:last-child { margin-bottom: 0; }
+  ul {
+    color: $default-text;
+    padding-bottom: 1em;
+  }
+}
+
+#error_explanation, .flash.error, div.ui-state-error {
+  background: $error-background;
+  color: $error-text;
+  border-color: $error-border;
+  h2, a {
+    color: $error-text; }
+}
+
+.flash.notice, div.ui-state-highlight {
+  background: $notice-background;
+  color: $notice-text;
+  border-color: $notice-border;
+  a {
+    color: $notice-text; }
+}
+
+
+/* #Misc
+================================================== */
+  .remove-bottom { margin-bottom: 0 !important; }
+  .half-bottom { margin-bottom: 10px !important; }
+  .add-bottom { margin-bottom: 20px !important; }

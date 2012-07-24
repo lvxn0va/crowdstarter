@@ -5,7 +5,6 @@ RailsThemes.com, which is licensed for use in a single website. The
 license can be found in the doc folder of this application or at
 railsthemes.com/terms. -->
 
-
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -41,15 +40,15 @@ railsthemes.com/terms. -->
           <%= yield :sidebar %>
         </div>
         <div id="sidebar_content" class="twelve columns">
-          <%= render 'layouts/flash', :flash => flash %>
+          <div class="row">
+            <div class="twelve columns">
+              <%= render 'layouts/flash', :flash => flash %>
+            </div>
+          </div>
           <%= yield %>
         </div>
       <% else %>
-        <div class="row">
-          <div class="sixteen columns">
-            <%= render 'layouts/flash', :flash => flash %>
-          </div>
-        </div>
+        <%= render 'layouts/flash', :flash => flash %>
         <%= yield %>
       <% end %>
     </div>
@@ -57,5 +56,4 @@ railsthemes.com/terms. -->
     </div>
   </div>
   <%= render 'layouts/footer' %>
-</body>
 </html>

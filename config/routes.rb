@@ -43,4 +43,7 @@ Crowdstarter::Application.routes.draw do
 
   # /username
   get ":user" => "projects#index"
+  match 'railsthemes/landing' => 'railsthemes#landing'
+  match 'railsthemes/inner' => 'railsthemes#inner'
+  match 'railsthemes/jquery_ui' => 'railsthemes#jquery_ui'
 end

@@ -1,0 +1,372 @@
+// This file is included as part of the Meta theme from
+// RailsThemes.com, which is licensed for use in a single website. The
+// license can be found in the doc folder of this application or at
+// railsthemes.com/terms.
+
+@import "railsthemes_meta/base";
+
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* Table of Content
+==================================================
+  #Site Styles
+  #Page Styles
+  #Media Queries
+  #Font-Face */
+
+/* #Site Styles
+================================================== */
+ul.navigation {
+  font-weight: bold;
+  li {
+    display: inline;
+    font-size: 18px;
+    margin: 9px 0 0 9px;
+    a {
+      color: $navigation-link;
+      text-decoration: none;
+      border-bottom: 3px solid $navigation-link-border;
+      &:hover {
+        color: $navigation-link-hover;
+        border-bottom: 3px solid $navigation-link-hover-border;
+      }
+    }
+  }
+}
+
+#header {
+  @include plain-gradient-background(bottom, $header-background1, $header-background2);
+  border-bottom: 3px solid $header-border;
+  padding: 10px 0;
+
+  #logo a { text-decoration: none; }
+  ul.navigation {
+    margin: 20px 0;
+    text-align: right;
+  }
+}
+
+#titlebar {
+  @include plain-gradient-background(top, $titlebar-background1, $titlebar-background2);
+  color: $titlebar-text;
+  h1, h2, h3, p, strong, a {
+    color: $titlebar-text;
+  }
+  p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  a.button {
+    color: $default-text;
+  }
+  .container {
+    background: url(image-path('railsthemes_meta/titlebar_background.png')) repeat center center;
+    padding: 25px 0;
+    .row, h2, h3 { margin: 0; }
+    .featured_content {
+      min-height: 260px;
+      h1, h2, h3, p, strong, a {
+        color: $default-text;
+      }
+    }
+  }
+}
+
+#contents {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#footer {
+  @include plain-gradient-background(top, $footer-background1, $footer-background2);
+  border-top: 1px solid $footer-border;
+  font-weight: normal;
+  padding: 10px 0;
+  ul.navigation {
+    li {
+      display: block;
+      margin-bottom: 0.75em;
+    }
+  }
+}
+
+// Sticky Footer
+$footer-height: 175px;
+
+html, body { height: 100%; }
+#main {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -1 * $footer-height;
+  #footer-spacer {
+    height: $footer-height; } }
+#footer{
+  clear: both;
+  position: relative;
+  height: $footer-height;
+}
+
+/* #Page Styles
+================================================== */
+ul.grid {
+  margin: 0;
+  li { display: inline; }
+}
+
+div.feature {
+  img {
+    float: left;
+    margin-right: 10px;
+  }
+}
+
+div.testimonial {
+  background-color: $testimonial-background;
+  border: 1px solid $quote-border;
+  padding: 1em;
+  blockquote { border: none; margin: 0; padding: 0; }
+  p {
+    font-size: 125%;
+    min-height: 60px;
+  }
+  cite { float: right; }
+  img {
+    float: left;
+    margin-right: 1em;
+    height: 60px;
+    @include border-radius(7px);
+  }
+  span.credit {
+    margin-left: 10px;
+  }
+}
+
+blockquote, q {
+  color: $quote-text;
+  font-style: italic;
+}
+blockquote p, p q {
+  &:before, &:after {
+    content: '"';
+  }
+  margin-bottom: 0.25em;
+}
+blockquote {
+  span.date {
+    font-style: normal;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  &.eye-catcher {
+    font-style: italic;
+    text-align: center;
+  }
+}
+
+.eye-catcher {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+table {
+  background-color: $pricing-grid-background;
+  td, th {
+    padding: 0.45em;
+    border: 1px solid $darkgray; //$pricing-grid-border;
+    border-top: none;
+  }
+  th {
+    color: $pricing-grid-header-text;
+    font-family: 'Crete Round', serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    @include plain-gradient-background(top, $pricing-grid-features-background1, $pricing-grid-features-background2);
+  }
+  // The first tr (whether header or not) in the table
+  thead tr:first-child, tbody:first-child tr:first-child {
+    border-color: $darkgray;
+    th:first-child, td:first-child {
+      @include border-corner-radius(top, left, 5px);
+      border-left: none;
+    }
+    th:last-child, td:last-child {
+      @include border-corner-radius(top, right, 5px);
+      border-right: none;
+    }
+  }
+  tbody tr:nth-of-type(even) { background: $pricing-grid-alternate-background; }
+}
+
+.featured_content {
+  @include border-radius(10px);
+  padding: 10px;
+  border: 2px solid $white1;
+  background-color: $whitesmoke2;
+  img {
+    text-align: center;
+  }
+}
+
+// Pricing Grid
+table.pricing {
+  background-color: $pricing-grid-background;
+  td, th {
+    text-align: center;
+    padding: 0;
+    border: none;
+    font-family: 'Crete Round', serif;
+    font-size: 18px;
+    line-height: 30px;
+  }
+  th {
+    background: transparent;
+    filter: none;
+    color: $default-text;
+  }
+  thead {
+    th {
+      vertical-align: bottom;
+      h3 {
+        color: $pricing-grid-header-text;
+        font-family: Helvetica;
+        font-size: 24px;
+        line-height: 65px;
+        background-color: $pricing-grid-header-color;
+        min-width: 120px;
+        margin: 0;
+      }
+      &:nth-of-type(even) h3 {
+        @include plain-gradient-background(top, $pricing-grid-header-background3, $pricing-grid-header-background1);
+      }
+      &:nth-of-type(odd) h3 {
+        @include plain-gradient-background(top, $pricing-grid-header-background3, $pricing-grid-header-background2);
+      }
+      // Features
+      &:first-child {
+        h3 {
+          font-family: 'Crete Round', serif;
+          font-weight: 500;
+          font-size: 26px;
+          line-height: 53px;
+          @include plain-gradient-background(top, $pricing-grid-features-background1, $pricing-grid-features-background2);
+        }
+      }
+      // Features & First Price Tier
+      &:nth-of-type(1), &:nth-of-type(2) {
+        h3 {
+          @include border-corner-radius(top, left, 5px);
+        }
+      }
+      // Last Price Tier
+      &:last-of-type h3 {
+        @include border-corner-radius(top, right, 5px);
+      }
+    }
+  }
+  tbody {
+    tr {
+      &:nth-of-type(even) { background: $pricing-grid-alternate-background; }
+      th:first-child {
+        padding: 0 0.75em;
+        line-height: 53px;
+        text-align: left;
+        border-right: 1px solid $pricing-grid-border;
+      }
+      td { color: $pricing-grid-check-color; }
+    }
+  }
+  $highlighted-column: $featured-pricing-level + 1;
+  tbody tr:nth-of-type(odd) td:nth-of-type(#{$featured-pricing-level}),
+  tfoot tr th:nth-of-type(#{$highlighted-column}) div {
+    background: $pricing-grid-featured-background;
+    border-left: solid 1px $pricing-grid-featured-border;
+    border-right: solid 1px $pricing-grid-featured-border;
+  }
+  tfoot tr th:nth-of-type(#{$highlighted-column}) div {
+    border-bottom: solid 1px $pricing-grid-featured-border;
+    @include border-corner-radius(bottom, left, 3px);
+    @include border-corner-radius(bottom, right, 3px);
+  }
+  tfoot {
+    border-top: 1px solid $pricing-grid-border;
+    th {
+      color: $pricing-grid-footer-text;
+      font-size: 30px;
+      line-height: 60px;
+      &:first-of-type { font-size: 24px; }
+    }
+    .exp { //rename this
+      margin: 0 0.5em;
+      color: $pricing-grid-unavailable-text;
+      text-align: center;
+      font-size: 18px;
+      line-height: 18px;
+    }
+  }
+}
+
+/* #Media Queries
+================================================== */
+
+  /* Smaller than standard 960 (devices and browsers) */
+  @media only screen and (max-width: 959px) {}
+
+  /* Tablet Portrait size to standard 960 (devices and browsers) */
+  @media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+  /* All Mobile Sizes (devices and browser) */
+  @media only screen and (max-width: 767px) {}
+
+  /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+  @media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+  /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+  @media only screen and (max-width: 479px) {}
+
+
+/* #Font-Face
+================================================== */
+/*   This is the proper syntax for an @font-face file
+    Just create a "fonts" folder at the root,
+    copy your FontName into code below and remove
+    comment brackets */
+
+/*  @font-face {
+      font-family: 'FontName';
+      src: url('../fonts/FontName.eot');
+      src: url('../fonts/FontName.eot?iefix') format('eot'),
+           url('../fonts/FontName.woff') format('woff'),
+           url('../fonts/FontName.ttf') format('truetype'),
+           url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+      font-weight: normal;
+      font-style: normal; }
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Crete+Round:400,400italic|PT+Sans+Caption:400,700);
+
+h1, h2, h3, h4, h5, h6, #header {
+  font-family: 'Crete Round', serif;
+}
+
+body, ul.navigation {
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+code {
+  font-family: 'Droid Sans Mono', fixed-width, sans-serif;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}

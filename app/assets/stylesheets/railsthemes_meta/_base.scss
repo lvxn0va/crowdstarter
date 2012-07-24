@@ -1,0 +1,155 @@
+$crimson: #b61b2a;
+$midnightblue: #2a4380;
+$teal1: #0b4a4c;
+$teal2: #0c6b6d;
+$teal3: #006060;
+$darkcyan: #009898; //we can't use pure-009999 because compass :compact + ie gradient syntax yields hideous gradients
+$lightseagreen: #129a9a;
+$orange: #ffc040;
+
+$steelblue: #336699;
+$darkslateblue: #404041;
+$lightslategray: #909091;
+$black1: #000000;
+$black2: #181818;
+$black3: #222222;
+$black4: #252525;
+$black5: #2c2c2c;
+$black6: #333333;
+$dimgray1: #454545;
+$dimgray2: #464646;
+$dimgray3: #555555;
+$dimgray4: #666666;
+$gray: #898989;
+$darkgray: #ababab;
+$lightgray1: #cdcdcd;
+$lightgray2: #d7d7d7;
+$gainsboro1: #dedede;
+$gainsboro2: #e6e6e6;
+$whitesmoke1: #ededed;
+$whitesmoke2: #f5f5f5;
+$white1: #fafafa;
+$white2: #fefefe; //we can't use pure-white because compass :compact + ie gradient syntax yields hideous gradients
+
+$body-background: $white2;
+$default-text: $black5;
+$default-header-text: $black2;
+$default-link-text: $black6;
+$default-link-hover: $black1;
+$default-strong-text: $black6;
+$emphasized-text: $black1;
+$demphasized-text: $gray;
+
+$header-background1: $whitesmoke1;
+$header-background2: $white2;
+$header-border: $lightseagreen;
+
+$titlebar-background1: $darkcyan;
+$titlebar-background2: $midnightblue;
+$titlebar-text: $white2;
+
+$navigation-link: $teal3;
+$navigation-link-border: $default-text;
+$navigation-link-hover: $lightslategray;
+$navigation-link-hover-border: $darkslateblue;
+
+$pagination-border: $lightgray2;
+$pagination-background: $gainsboro1;
+$pagination-active-background: $darkslateblue;
+
+$footer-background1: $gainsboro1;
+$footer-background2: $white2;
+$footer-border: $header-border;
+$footer-text: $white2;
+
+$featured-pricing-level: 2; // This determines which of the pricing levels is highlighted
+
+$quote-text: $gray;
+$quote-border: $lightgray1;
+$cite-color: $dimgray3;
+
+$testimonial-background: $white1;
+
+$pricing-grid-header-text: $white2;
+$pricing-grid-header-color: $teal3;
+$pricing-grid-features-background1: $dimgray2; //this is for the "Features" text
+$pricing-grid-features-background2: $black4; //this is for the "Features" text
+$pricing-grid-header-background1: $teal3;
+$pricing-grid-header-background2: $teal1;
+$pricing-grid-header-background3: $darkcyan;
+
+$pricing-grid-check-color: $teal3;
+
+$pricing-grid-border: $black4;
+$pricing-grid-background: $white2;
+$pricing-grid-alternate-background: $gainsboro2;
+$pricing-grid-featured-border: $lightgray2;
+$pricing-grid-featured-background: $whitesmoke2;
+
+$pricing-grid-unavailable-text: $darkslateblue;
+
+$pricing-grid-footer-text: $teal2;
+
+// Flash messages
+$notice-background: $gainsboro2;
+$notice-text: $steelblue;
+$notice-border: $darkgray;
+
+$error-text: $crimson;
+$error-border: $orange;
+$error-background: $whitesmoke1;
+
+$form-hint-text: $dimgray4;
+$form-label-text: $emphasized-text;
+
+$input-text: $dimgray3;
+$input-border: $lightgray1;
+$input-background: $white2;
+$input-focus-text: $default-text;
+$input-focus-border: $darkgray;
+
+$button-text: $default-text;
+$button-loud-text: $teal3;
+$button-background1: $white2;
+$button-background2: $gainsboro2;
+$button-border: $darkgray;
+
+$button-hover-text: $black3;
+$button-hover-background1: $gainsboro1;
+$button-hover-background2: $darkgray;
+$button-hover-border1: $gray;
+$button-hover-border2: $darkgray;
+
+$button-active-background1: $lightgray1;
+$button-active-background2: $gray;
+$button-active-border: $dimgray4;
+
+$hr-border: $gainsboro1;
+
+
+// Mixins
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin border-corner-radius($a, $b, $radius){
+  -moz-border-radius-#{$a}#{$b}: $radius;
+  -webkit-border-#{$a}-#{$b}-radius: $radius;
+  border-#{$a}-#{$b}-radius: $radius;
+}
+
+@mixin plain-gradient-background($direction, $background1, $background2) {
+  background: $background1;
+  background: -moz-linear-gradient($direction, $background1 0%, $background2 100%);
+  background: -webkit-gradient(linear, left $direction, left $direction, color-stop(0%, $background1), color-stop(100%, $background2));
+  background: -webkit-linear-gradient($direction, $background1 0%, $background2 100%);
+  background: -o-linear-gradient($direction, $background1 0%, $background2 100%);
+  background: -ms-linear-gradient($direction, $background1 0%, $background2 100%);
+  background: linear-gradient($direction, $background1 0%, $background2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$background1}', endColorstr='#{$background2}',GradientType=0 );
+}
