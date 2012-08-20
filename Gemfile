@@ -38,6 +38,7 @@ gem 'loofah-activerecord'
 gem 'exception_notification'
 gem 'oauth2'
 gem 'hashie'
+gem 'haml'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
