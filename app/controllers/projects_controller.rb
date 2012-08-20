@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def create
     if logged_in?
       params[:project][:funding_due] += " #{params[:timezone]}"
-      params[:project][:payment_gateway] = SETTINGS.default_payment_gateway
+      params[:project][:gateway_id] = Gateway.find_by_provider(SETTINGS.default_payment_gateway).id
       project = current_user.projects.create(params[:project])
       if project.valid?
         project.activities.create({:detail => "Created project",
@@ -97,7 +97,12 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    current_user.projects.find(params[:id]).destroy
+    project = current_user.projects.find(params[:id])
+    if project.editable?
+      project.destroy
+    else
+      flash[:error] = "Project must be editable to remove."
+    end
     redirect_to :root
   end
 
@@ -106,7 +111,8 @@ class ProjectsController < ApplicationController
     @contribution = project.contributions.create(
                            :user_id => current_user.id,
                            :amount => params[:amount],
-                           :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
+                           :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
+                           :gateway_id => project.gateway_id)
     if @contribution.valid?
       reward = project.closest_reward(@contribution.amount)
       if reward
@@ -134,7 +140,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if @project.user.wepay_token.blank?
       flash[:error] = "Please connect your account to a payment gateway."
-      redirect_to @project.user
+      redirect_to user_path(@project.user, :tab=>"payment_gateway")
     end
   end
 
@@ -155,11 +161,16 @@ class ProjectsController < ApplicationController
 
   def unpublish
     @project = current_user.projects.find(params[:id])
-    @project.unpublish!
-    flash[:success] = "Project has been unpublished!"
-    @project.activities.create({:detail => "Project unpublished",
-                               :code => "unpublish",
-                               :user => current_user})
+    contributions = @project.contributions
+    if contributions.authorizeds.count + contributions.reserveds.count == 0
+      @project.unpublish!
+      flash[:success] = "Project has been unpublished!"
+      @project.activities.create({:detail => "Project unpublished",
+                                 :code => "unpublish",
+                                 :user => current_user})
+    else
+      flash[:success] = "Project has contributions and cannot be unpublished."
+    end
 
     redirect_to @project
   end

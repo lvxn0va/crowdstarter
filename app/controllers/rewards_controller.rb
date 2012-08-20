@@ -1,5 +1,5 @@
 class RewardsController < ApplicationController
-  before_filter :require_login, :only => [:new, :create, :edit, :update]
+  before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :editable_project, :only => [:new, :create, :edit, :update]
 
   def new
@@ -16,7 +16,7 @@ class RewardsController < ApplicationController
                                   :code => "reward",
                                   :user => current_user})
     else
-      flash[:error] = "Reward creation failed."
+      flash[:error] = "Reward creation failed. #{reward.errors.full_messages.join(' ')}"
     end
     redirect_to @project
   end
@@ -27,5 +27,20 @@ class RewardsController < ApplicationController
       flash[:error] = "Project is not editable"
       redirect_to @project
     end
+  end
+
+  def destroy
+    # todo: use cancan
+    reward = Reward.find(params[:id])
+    if reward
+      project = reward.project
+      target = project
+      if project.user == current_user
+        reward.destroy
+      end
+    else
+      target = :root
+    end
+    redirect_to target
   end
 end

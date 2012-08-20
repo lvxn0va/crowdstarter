@@ -25,33 +25,28 @@ PCustomer = Hashie::Mash.new({
 PProject = Hashie::Mash.new({
 })
 
-describe "Project management", :type => :request do
-  it "Creates a new project using the big Add button" do
-    # Manager creates project
-    OmniAuth.config.mock_auth[:facebook] = PManager
-    visit '/'
-    click_on "facebook-login"
-    page.should have_content("manager@test.site")
+def project_manager_setup
+  # Mock the facebook response
+  OmniAuth.config.mock_auth[:facebook] = PManager
+  User.create(:email=>PManager.info.email,
+              :facebook_uid => PManager.uid,
+              :wepay_token => '{"user_id":1166,"token_type":"BEARER","access_token":"token123","refresh_token":null,"expires_at":null}'
+             )
+  Gateway.create(:provider => 'wepay')
+end
 
-    # Setup Amazon multiuse token
-    visit "/payment/tokenize?tokenID=abc123"
-    # Setup Wepay token
-    wpauth = mock("Wepay auth", {:get_token => mock("Wepay token",
-                                                    {:params => {},
-                                                     :token => '1234',
-                                                     :refresh_token => 'abc',
-                                                     :expires_at => 'ab'})})
-    WEPAY.should_receive(:auth_code).and_return(wpauth)
-    manager_wepay = mock("manager wepay")
-    manager_wepay.should_receive(:get).with('/v2/account/find',
-                                         {:params=>{
-                                            :reference_id=>"everythingfunded"}}).
-                                    and_return(mock("wepay response",
-                                                    {:parsed => ['fake account']}))
-    OAuth2::AccessToken.should_receive(:from_hash).and_return(manager_wepay)
-    visit "/payment/wepay_request?code=abc123"
+describe "Project manager", :type => :request do
+  it "creates a new project using the big Add button" do
+    project_manager_setup
 
+    # Sign in
     visit '/'
+    fill_in 'email', :with => PManager.info.email
+    click_on "Sign in"
+
+    # Check that we're logged in
+    page.should have_content(PManager.info.email)
+
     click_on "Add a project"
     page.has_css?("form#new_project")
     fill_in('Project Name', :with => "A new pony")
@@ -90,7 +85,7 @@ describe "Project management", :type => :request do
     #reference = find(:xpath, "//input[@name='contribution_id']")["value"]
     user_wepay = mock("user wepay")
     OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
-    resp = mock("wepay checkout", :parsed => {"checkout_id" => 1,
+    resp = mock("wepay checkout", :parsed => {"checkout_id" => 123456,
                                               "checkout_uri" => "uri"})
     user_wepay.should_receive(:get).and_return(resp)
     click_on "Continue to WePay Checkout"
@@ -100,6 +95,11 @@ describe "Project management", :type => :request do
 
 
     #WePay callback
+    wepay_status = mock("wepay status")
+    OAuth2::AccessToken.should_receive(:from_hash).and_return(wepay_status)
+    resp = mock("wepay status result", :parsed => {"checkout_id" => 123456,
+                                                   "state" => "authorized"})
+    wepay_status.should_receive(:get).and_return(resp)
     visit "/gateways/wepay/finish?checkout_id=123456"
 
     within(".contributors") do

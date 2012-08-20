@@ -3,17 +3,20 @@ class Project < ActiveRecord::Base
   include Workflow
 
   belongs_to :user
+  belongs_to :gateway
   has_many :contributions
   has_many :tags, :through => :taggings
   has_many :taggings
   has_many :activities
   has_many :rewards
+  has_many :gateway_logs
+
   friendly_id :name, :use => :slugged
 
-  validates_presence_of :name, :funding_due, :amount, :user_id, :payment_gateway
+  validates :name, :funding_due, :amount, :user_id, :gateway_id, :presence => true
 
   has_attached_file :image, :styles => {:thumb => "133x75>",
-                                        :medium => "533x300>"},
+                                        :medium => "530x300>"},
               :default_url => "/assets/:style/missing.png"
 
 
@@ -77,17 +80,21 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def gateway_sync
+    contributions.each{|c| c.wepay_sync}
+  end
+
   def fund
     contributions.reserveds.each do |contrib|
       # Kick off the capture and wait for the IPN
       # contrib.wepay_refresh
-      response = contrib.wepay_capture
+      contrib.wepay_capture
     end
   end
 
   def fail
     contributions.authorizeds.each do |contrib|
-      response = contrib.cancel!
+      response = contrib.wepay_cancel
       logger.info response.inspect
       if contrib.cancelled?
         activities.create(:detail => "Cancelled #{contrib.user.email} $#{contrib.amount}",
